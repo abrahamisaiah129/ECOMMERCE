@@ -94,4 +94,126 @@
 - **Validation**: Implement data validation rules to ensure the integrity of your data.
 - **Security**: Ensure proper authentication and authorization mechanisms are in place for user actions.
 
-This schema is a starting point, and you can expand or modify it based on your application's specific needs! -->
+This schema is a starting point, and you can expand or modify it based on your application's specific needs! 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+To enable "Less secure apps" for a Gmail account (if you're using it for your project), follow these steps:
+
+### Important Note:
+Google has discontinued support for "Less secure apps" as of May 30, 2022. Instead, they encourage using OAuth 2.0 or App Passwords, especially if you're using 2-Step Verification. If you still want to use email and password authentication, you can use **App Passwords**, which is more secure.
+
+Here’s how to enable **App Passwords** for Gmail:
+
+### Steps to Enable App Passwords in Gmail:
+
+1. **Turn on 2-Step Verification**:
+   - Go to your Google Account: [myaccount.google.com](https://myaccount.google.com/)
+   - Select **Security** from the left-hand menu.
+   - Under "Signing in to Google," find **2-Step Verification** and click it.
+   - Follow the instructions to set up 2-Step Verification (you'll likely need your phone for this step).
+
+2. **Generate an App Password**:
+   - After enabling 2-Step Verification, go back to the **Security** section.
+   - Under "Signing in to Google," you'll see a section labeled **App Passwords**.
+   - Select **App Passwords**.
+   - Choose an app and device you want to generate the password for. In your case, choose **Mail** as the app and select **Other (Custom name)** for the device (you can name it something like "Node.js").
+   - Google will generate a 16-character app password. Copy this password.
+
+3. **Use the App Password in Your Code**:
+   Instead of using your regular Google account password, use the app password you just generated for the email login in your code:
+
+   ```javascript
+   LoginCredentials.mailID = process.env.AUTH_EMAIL;  // your email
+   LoginCredentials.password = 'your-app-password';   // the 16-character app password
+   ```
+
+### Why App Passwords?
+App passwords are a more secure way to allow external apps (like your Node.js project) to access your Gmail account without giving them your actual Google account password. It’s recommended over enabling "Less secure apps," which Google has disabled to improve security.
+
+### Reference for More Info:
+You can find more details about App Passwords here: [Google Support: App Passwords](https://support.google.com/accounts/answer/185833?hl=en).
+
+This method ensures a secure way to connect your email service without compromising security!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-->

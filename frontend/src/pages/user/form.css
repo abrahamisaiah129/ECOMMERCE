@@ -1,0 +1,82 @@
+.user-profile {
+  background: linear-gradient(to right, #34495e, #2c3e50); /* Muted gradient */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.user-profile h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #ecf0f1; /* Light gray for contrast */
+}
+
+.edit-form label {
+  display: block;
+  margin: 10px 0 5px;
+  color: #ecf0f1; /* Same muted gray for labels */
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #95a5a6; /* Muted gray border */
+  border-radius: 5px;
+  background-color: #2c3e50; /* Subtle background */
+  color: #ecf0f1; /* Text color for input */
+}
+
+.edit-form input:focus {
+  outline: none;
+  border-color: #1abc9c; /* Soft green focus state */
+  box-shadow: 0 0 5px rgba(26, 188, 156, 0.5); /* Subtle shadow on focus */
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.edit-btn {
+  background-color: #f39c12; /* Softer orange */
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #e67e22; /* Slightly darker on hover */
+}
+
+.save-btn {
+  background-color: #27ae60; /* Muted green */
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #2ecc71; /* Slightly brighter green on hover */
+}
+
+.custom-toast {
+  background-color: #27ae60; /* Same muted green as button */
+  color: white;
+  font-weight: bold;
+}
+
+.custom-toast .Toastify__toast-body {
+  font-size: 0.9rem; /* Slightly smaller text for a more polished look */
+}
+
+/* Optional: Make the toast closer to the top with less margin */
+.Toastify__toast-container {
+  top: 10%;
+}
+
+/* Subtle shadow for the toast */
+.custom-toast {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

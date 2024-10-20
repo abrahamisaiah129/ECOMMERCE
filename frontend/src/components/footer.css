@@ -1,0 +1,40 @@
+.footer {
+  background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #f9a602, #f9c602);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.animated-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-link:after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #f9a602;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.animated-link:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+.list-inline-item a {
+  color: white; /* Ensures icons are visible */
+  transition: transform 0.2s ease;
+}
+
+.list-inline-item a:hover {
+  transform: scale(1.1); /* Slightly enlarges icons on hover */
+}

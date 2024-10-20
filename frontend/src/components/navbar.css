@@ -1,0 +1,83 @@
+/* Gradient background for the navbar */
+.bg-gradient-navbar {
+  background: linear-gradient(90deg, #4A90E2, #5A3D99, #FF6F61); /* Muted blue, purple, and soft coral */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background 0.5s ease-in-out;
+}
+
+/* Animated gradient text */
+.gradient-text {
+  background: linear-gradient(45deg, #4A90E2, #5A3D99, #FF6F61);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 1.8rem;
+  font-weight: bold;
+  background-size: 200%;
+  animation: gradient-animation 3s ease infinite;
+}
+
+/* Gradient animation for text */
+@keyframes gradient-animation {
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
+  }
+}
+
+/* Animated link hover effect */
+.animated-link {
+  position: relative;
+  display: inline-block;
+  color: white;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.animated-link::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.animated-link:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+.animated-link:hover {
+  color: #FFD700; /* Soft gold color on hover */
+  transform: scale(1.05);
+}
+
+/* For the pills in the navbar */
+.pill {
+  background-color: #FF6F61;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.pill:hover {
+  background-color: #D9514E;
+}
+.navbar-nav img {
+  border: 2px solid white;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-nav img:hover {
+  transform: scale(1.1);
+}
