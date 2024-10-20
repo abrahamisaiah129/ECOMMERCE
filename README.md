@@ -1,6 +1,7 @@
 # E-commerce Project
 
 ## Features
+
 - Payment integration
 - Sell products
 - Buy products
@@ -20,6 +21,7 @@
 - Order management
 
 ## Things to Do - Backend
+
 - User login and signup *(Done)*
 - User forgot password and OTP (Two-factor authentication) *(Done)*
 - User search for products
@@ -31,6 +33,7 @@
 - Code optimization
 
 ## Things to Do - Frontend
+
 - User login page and signup dynamically in one page with states *(Done)*
 - OTP verification page (email input and update password)
 - Search query *(Done)*
