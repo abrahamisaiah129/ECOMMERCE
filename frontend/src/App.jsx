@@ -13,6 +13,7 @@ import Cart from './pages/cart/cart';
 import Register from './pages/authentication/register'
 import UserProfileForm from './pages/user/profile';
 import OrderTracking from './pages/cart/ordertracking';
+import ViewProduct from './pages/product/viewproduct';
 // providers
 import { ShopContextProvider } from './pages/context/shop-context';
 import { ThemeProvider } from './pages/context/theme-context';
@@ -21,6 +22,7 @@ import { useEffect,useState } from 'react';
 // toastify
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS
+import Wishlist from './pages/cart/wishlist';
   
 
 
@@ -55,7 +57,9 @@ useEffect(() => {
               <Route path='/settings' element={<Settings/>} />
                 <Route path='/profile' element={<UserProfileForm />} />
                 <Route path="/track-orders" element={<OrderTracking />} />
+                <Route path="/wishlist" element={<Wishlist />} />
             
+        <Route path="/product/:productId" element={<ViewProduct />} />
         {/* <Route path="/product" element={<Product  />} /> */}
           
       

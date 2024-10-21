@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import { ShopContext } from '../context/shop-context';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 function CartItem(props) {
     const { removeFromCart, addToCart, inputNumberFunc, deleteFromCart } = useContext(ShopContext);
@@ -25,7 +26,10 @@ function CartItem(props) {
                     style={{ width: "100%", height: "150px", objectFit: "cover", borderRadius: "10px" }} 
                 />
                 
-                <div className="text-center fw-bold" style={{ fontSize: "1.2rem" }}>{name}</div>
+                {/* Wrap the product name with a Link to the product detail page */}
+                <Link to={`/product/${id}`} className="text-center fw-bold" style={{ fontSize: "1.2rem", textDecoration: 'none', color: '#333' }}>
+                    {name}
+                </Link>
 
                 <div className="d-flex justify-content-between align-items-center w-100 mt-2">
                     <div className="fw-bold" style={{ color: "#333" }}>N{price}</div>

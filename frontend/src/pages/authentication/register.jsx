@@ -14,9 +14,11 @@ function Register() {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [otp, setOtp] = useState("");
-  const [showOtp, setShowOtp] = useState(false); // New state for OTP visibility
+  const [showOtp, setShowOtp] = useState(false);
+  const [newPassword, setNewPassword] = useState(""); // New password state
+  const [confirmNewPassword, setConfirmNewPassword] = useState(""); // Confirm new password state
   const [errors, setErrors] = useState({});
-  const { isDarkTheme, logout } = useContext(ThemeContext); // Ensure logout function is available
+  const { isDarkTheme, logout } = useContext(ThemeContext);
 
   const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
@@ -85,7 +87,7 @@ function Register() {
     if (validateEmail(loginEmail)) {
       console.log("OTP sent to:", loginEmail);
       toast.success('OTP sent to your email!');
-      setShowOtp(true); // Show OTP input after clicking forgot password
+      setShowOtp(true);
     } else {
       toast.error('Please enter a valid email!');
     }
@@ -93,9 +95,32 @@ function Register() {
 
   const handleVerifyOtp = (e) => {
     e.preventDefault();
-    // Add your OTP verification logic here
     console.log("OTP entered:", otp);
-    toast.success('OTP verified successfully!');
+    toast.success('OTP verified successfully! Please enter your new password.');
+  };
+
+  const handleChangePassword = (e) => {
+    e.preventDefault();
+    let passwordErrors = {};
+
+    if (newPassword.length < 6) {
+      passwordErrors.newPassword = "Password must be at least 6 characters long.";
+    }
+    if (newPassword !== confirmNewPassword) {
+      passwordErrors.confirmNewPassword = "Passwords do not match.";
+    }
+
+    setErrors(passwordErrors);
+
+    if (Object.keys(passwordErrors).length === 0) {
+      console.log("Password changed:", newPassword);
+      toast.success('Password changed successfully! You can now log in.');
+      setHaveAccount(true); // Show login form after password change
+      setShowOtp(false); // Hide OTP form
+      // Resetting input fields after successful password change
+      setLoginEmail(""); 
+      setLoginPassword("");
+    }
   };
 
   return (
@@ -235,6 +260,37 @@ function Register() {
                   </div>
                   <button type="submit" className="btn btn-sm btn-info w-100 rounded-pill">
                     Verify OTP
+                  </button>
+                </form>
+              )}
+
+              {/* Change Password Form after OTP Verification */}
+              {showOtp && (
+                <form onSubmit={handleChangePassword}>
+                  <div className="mb-3">
+                    <label className="form-label">New Password</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      placeholder="Enter new password"
+                    />
+                    {errors.newPassword && <small className="text-danger">{errors.newPassword}</small>}
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">Confirm New Password</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      value={confirmNewPassword}
+                      onChange={(e) => setConfirmNewPassword(e.target.value)}
+                      placeholder="Confirm new password"
+                    />
+                    {errors.confirmNewPassword && <small className="text-danger">{errors.confirmNewPassword}</small>}
+                  </div>
+                  <button type="submit" className="btn btn-sm btn-success w-100 rounded-pill">
+                    Change Password
                   </button>
                 </form>
               )}

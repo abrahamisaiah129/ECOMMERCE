@@ -6,26 +6,39 @@ import './navbar.css';
 
 function Navbar() {
   const [dropdown, setDropdown] = useState(false);
-  const { cartItems } = useContext(ShopContext);
-  const [noOfItems, setNoOfItems] = useState(0);
+  const { cartItems, wishlistItems } = useContext(ShopContext); // Wishlist is now part of the context
+  const [noOfCartItems, setNoOfCartItems] = useState(0);
+  const [noOfWishlistItems, setNoOfWishlistItems] = useState(0);
   const location = useLocation();
 
   useEffect(() => {
-    // Reset dropdown on route change
+    // Close dropdown on route change
     setDropdown(false);
   }, [location]);
 
+  // Update the count of cart items
   useEffect(() => {
     let cartNumber = 0;
-    PRODUCTS.forEach((data) => {
-      if (cartItems[data.id] !== 0) {
+    PRODUCTS.forEach((product) => {
+      if (cartItems[product.id] !== 0) {
         cartNumber += 1;
       }
     });
-    setNoOfItems(cartNumber);
+    setNoOfCartItems(cartNumber);
   }, [cartItems]);
 
-  const dropDownButton = () => {
+  // Update the count of wishlist items
+  useEffect(() => {
+    let wishlistNumber = 0;
+    PRODUCTS.forEach((product) => {
+      if (wishlistItems[product.id] !== 0) {
+        wishlistNumber += 1;
+      }
+    });
+    setNoOfWishlistItems(wishlistNumber);
+  }, [wishlistItems]);
+
+  const handleDropdownToggle = () => {
     setDropdown(!dropdown);
   };
 
@@ -36,7 +49,7 @@ function Navbar() {
         <button
           className="navbar-toggler bg-white text-black"
           type="button"
-          onClick={dropDownButton}
+          onClick={handleDropdownToggle}
         >
           <i className="fa fa-bars"></i>
         </button>
@@ -48,7 +61,13 @@ function Navbar() {
             <Link className="nav-item nav-link animated-link text-white fw-bold" to="/cart">
               <i className="fa-solid fa-cart-shopping"></i> Cart{" "}
               <span className="pill bg-danger p-1 m-1 rounded text-white">
-                {noOfItems}
+                {noOfCartItems}
+              </span>
+            </Link>
+            <Link className="nav-item nav-link animated-link text-white fw-bold" to="/wishlist">
+              <i className="fa-solid fa-heart"></i> Wishlist{" "}
+              <span className="pill bg-danger p-1 m-1 rounded text-white">
+                {noOfWishlistItems}
               </span>
             </Link>
             <Link className="nav-item nav-link animated-link text-white fw-bold" to="/settings">
@@ -57,7 +76,6 @@ function Navbar() {
             <Link className="nav-item nav-link animated-link text-white fw-bold" to="/register">
               <i className="fa-solid fa-sign-in"></i> Register
             </Link>
-            {/* New Track Orders Link */}
             <Link className="nav-item nav-link animated-link text-white fw-bold" to="/track-orders">
               <i className="fa-solid fa-truck"></i> Track Orders
             </Link>

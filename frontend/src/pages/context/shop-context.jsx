@@ -13,8 +13,17 @@ const getDefaultCart = () => {
     return cart;
 }
 
+const getDefaultWishList = () => {
+    let wishList = {};
+    for (let i = 1; i <= PRODUCTS.length; i++) {
+        wishList[i] = 0; // Initialize cart with 0 quantity for each product
+    }
+    return wishList;
+}
+
 export const ShopContextProvider = (props) => {
     const [cartItems, setCartItems] = useState(getDefaultCart());
+    const [wishlistItems, setwishlistItems] = useState(getDefaultWishList());
     const [currency, setChangeCurrency] = useState('naira');
 
     const changeCurrency = (newCurrency) => {
@@ -60,14 +69,36 @@ export const ShopContextProvider = (props) => {
         });
     }
 
+    const addToWishlist = (itemId) => {
+        setwishlistItems((prev) => {
+            const newCount = prev[itemId] + 1;
+            toast.success(`Added item with id ${itemId} to wishlist`); // Show success notification
+            return { ...prev, [itemId]: newCount }; // Increment the quantity
+        });
+    }
+
+    const removeFromWishlist = (itemId) => {
+        setwishlistItems((prev) => {
+            const newCount = prev[itemId] - 1;
+            const count = newCount > 0 ? newCount : 0; // Ensure quantity doesn't go below 0
+            if (newCount <= 0) {
+                toast.warn(`Item with id ${itemId} removed from wishlist`); // Show warning notification
+            }
+            return { ...prev, [itemId]: count }; // Update the quantity
+        });
+    }
+
     const contextValue = {
         cartItems,
+        wishlistItems,
         addToCart,
         removeFromCart,
         inputNumberFunc,
         deleteFromCart,
         changeCurrency,
         currency,
+        removeFromWishlist,
+        addToWishlist
     };
 
     return (

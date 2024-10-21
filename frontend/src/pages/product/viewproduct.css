@@ -1,0 +1,27 @@
+.view-product-page {
+  margin-top: 50px;
+}
+
+.view-product-page img {
+  max-width: 100%;
+  height: auto;
+}
+
+.view-product-page h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.view-product-page p.lead {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.quantity-selector {
+  max-width: 120px;
+}
+
+.quantity-selector input {
+  text-align: center;
+}
