@@ -10,7 +10,7 @@
   background: linear-gradient(45deg, #4A90E2, #5A3D99, #FF6F61);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: transparent; /* Text color transparent to show gradient */
   font-size: 1.8rem;
   font-weight: bold;
   background-size: 200%;
@@ -19,15 +19,9 @@
 
 /* Gradient animation for text */
 @keyframes gradient-animation {
-  0% {
-    background-position: 0%;
-  }
-  50% {
-    background-position: 100%;
-  }
-  100% {
-    background-position: 0%;
-  }
+  0% { background-position: 0%; }
+  50% { background-position: 100%; }
+  100% { background-position: 0%; }
 }
 
 /* Animated link hover effect */
@@ -55,7 +49,7 @@
 }
 
 .animated-link:hover {
-  color: #FFD700; /* Soft gold color on hover */
+  color: #FFD700; /* Soft gold on hover */
   transform: scale(1.05);
 }
 
@@ -71,8 +65,9 @@
 }
 
 .pill:hover {
-  background-color: #D9514E;
+  background-color: #D9514E; /* Darker coral on hover */
 }
+
 .navbar-nav img {
   border: 2px solid white;
   transition: transform 0.3s ease-in-out;
@@ -81,3 +76,32 @@
 .navbar-nav img:hover {
   transform: scale(1.1);
 }
+
+.new-color {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.new-color:hover {
+  color: #FFD700; /* Soft gold on hover */
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

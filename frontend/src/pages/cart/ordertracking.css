@@ -3,6 +3,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .gradient-text {
@@ -10,20 +11,8 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-/* ordertracking.css */
-
-.order-tracking {
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.gradient-text {
-  background: linear-gradient(to right, #6a11cb, #2575fc);
-  -webkit-background-clip: text;
-   background-clip: text;
-  -webkit-text-fill-color: transparent;
   margin-bottom: 15px;
+  font-size: 1.5rem; /* Increased size for better visibility */
 }
 
 .tracking-list {
@@ -35,9 +24,20 @@
   display: flex;
   align-items: center;
   padding: 10px 0;
+  transition: background-color 0.2s ease; /* Smooth background transition */
+}
+
+.tracking-item:hover {
+  background-color: #e9ecef; /* Light background on hover */
 }
 
 .tracking-item.completed {
   text-decoration: line-through;
   color: green; /* Optional: Change text color for completed items */
+  opacity: 0.6; /* Reduced opacity for completed items */
+}
+
+/* Focus styles for accessibility */
+.tracking-item:focus {
+  outline: 2px solid #6a11cb; /* Outline for focused elements */
 }

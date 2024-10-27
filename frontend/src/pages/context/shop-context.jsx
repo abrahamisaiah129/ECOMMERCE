@@ -1,92 +1,93 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useCallback } from "react";
 import PropTypes from "prop-types"; 
 import { PRODUCTS } from "../product/product-data";
-import { toast } from "react-toastify"; // Import toast
+import { toast } from "react-toastify";
 
 export const ShopContext = createContext(null);
 
 const getDefaultCart = () => {
     let cart = {};
     for (let i = 1; i <= PRODUCTS.length; i++) {
-        cart[i] = 0; // Initialize cart with 0 quantity for each product
+        cart[i] = 0;
     }
     return cart;
-}
+};
 
 const getDefaultWishList = () => {
     let wishList = {};
     for (let i = 1; i <= PRODUCTS.length; i++) {
-        wishList[i] = 0; // Initialize cart with 0 quantity for each product
+        wishList[i] = 0;
     }
     return wishList;
-}
+};
 
-export const ShopContextProvider = (props) => {
+export const ShopContextProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState(getDefaultCart());
-    const [wishlistItems, setwishlistItems] = useState(getDefaultWishList());
-    const [currency, setChangeCurrency] = useState('naira');
+    const [wishlistItems, setWishlistItems] = useState(getDefaultWishList());
+    const [currency, setCurrency] = useState('naira');
 
-    const changeCurrency = (newCurrency) => {
-        if (newCurrency !== currency) { 
-            setChangeCurrency(newCurrency);
+    // Use useCallback to memoize functions
+    const changeCurrency = useCallback((newCurrency) => {
+        if (newCurrency !== currency) {
+            setCurrency(newCurrency);
             const symbol = newCurrency === 'naira' ? '₦' : '$';
-            toast.success(`Currency changed to ${symbol}`); // Show success notification
+            toast.success(`Currency changed to ${symbol}`);
         }
-    }
+    }, [currency]);
 
-    const deleteFromCart = (id) => {
+    const deleteFromCart = useCallback((id) => {
         setCartItems((prev) => {
-            toast.info(`Removed item with id ${id} from cart`); // Show info notification
-            return { ...prev, [id]: 0 }; // Reset the quantity to 0 for the item
+            toast.info(`Removed item with id ${id} from cart`);
+            return { ...prev, [id]: 0 };
         });
-    }
+    }, []);
 
-    const inputNumberFunc = (value, id) => {
+    const inputNumberFunc = useCallback((value, id) => {
         const quantity = Number(value);
-        if (quantity < 0) return; // Prevent setting negative values
+        if (quantity < 0) return;
         setCartItems((prev) => {
-            toast.info(`Quantity for item with id ${id} updated to ${quantity}`); // Show info notification
-            return { ...prev, [id]: quantity }; // Update the quantity
+            toast.info(`Quantity for item with id ${id} updated to ${quantity}`);
+            return { ...prev, [id]: quantity };
         });
-    }
+    }, []);
 
-    const addToCart = (itemId) => {
+    const addToCart = useCallback((itemId) => {
         setCartItems((prev) => {
             const newCount = prev[itemId] + 1;
-            toast.success(`Added item with id ${itemId} to cart`); // Show success notification
-            return { ...prev, [itemId]: newCount }; // Increment the quantity
+            toast.success(`Added item with id ${itemId} to cart`);
+            return { ...prev, [itemId]: newCount };
         });
-    }
+    }, []);
 
-    const removeFromCart = (itemId) => {
+    const removeFromCart = useCallback((itemId) => {
         setCartItems((prev) => {
             const newCount = prev[itemId] - 1;
-            const count = newCount > 0 ? newCount : 0; // Ensure quantity doesn't go below 0
+            const count = newCount > 0 ? newCount : 0;
             if (newCount <= 0) {
-                toast.warn(`Item with id ${itemId} removed from cart`); // Show warning notification
+                toast.warn(`Item with id ${itemId} removed from cart`);
             }
-            return { ...prev, [itemId]: count }; // Update the quantity
+            return { ...prev, [itemId]: count };
         });
-    }
+    }, []);
 
-    const addToWishlist = (itemId) => {
-        setwishlistItems((prev) => {
+    const addToWishlist = useCallback((itemId) => {
+        setWishlistItems((prev) => {
             const newCount = prev[itemId] + 1;
-            toast.success(`Added item with id ${itemId} to wishlist`); // Show success notification
-            return { ...prev, [itemId]: newCount }; // Increment the quantity
+            toast.success(`Added item with id ${itemId} to wishlist`);
+            return { ...prev, [itemId]: newCount };
         });
-    }
+    }, []);
 
-    const removeFromWishlist = (itemId) => {
-        setwishlistItems((prev) => {
+    const removeFromWishlist = useCallback((itemId) => {
+        setWishlistItems((prev) => {
             const newCount = prev[itemId] - 1;
-            const count = newCount > 0 ? newCount : 0; // Ensure quantity doesn't go below 0
+            const count = newCount > 0 ? newCount : 0;
             if (newCount <= 0) {
-                toast.warn(`Item with id ${itemId} removed from wishlist`); // Show warning notification
+                toast.warn(`Item with id ${itemId} removed from wishlist`);
             }
-            return { ...prev, [itemId]: count }; // Update the quantity
+            return { ...prev, [itemId]: count };
         });
-    }
+    }, []);
 
     const contextValue = {
         cartItems,
@@ -98,15 +99,15 @@ export const ShopContextProvider = (props) => {
         changeCurrency,
         currency,
         removeFromWishlist,
-        addToWishlist
+        addToWishlist,
     };
 
     return (
         <ShopContext.Provider value={contextValue}>
-            {props.children}
+            {children}
         </ShopContext.Provider>
     );
-}
+};
 
 // Define PropTypes for the component
 ShopContextProvider.propTypes = {

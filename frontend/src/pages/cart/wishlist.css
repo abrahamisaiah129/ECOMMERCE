@@ -1,30 +1,36 @@
-/* Wishlist Page Styles */
+
+/* Wishlist Page Container */
 .container {
   margin-top: 40px;
 }
 
+/* Page Heading */
 h2 {
   color: #fff;
   text-align: center;
   margin-bottom: 20px;
+  font-size: 2rem; /* Larger, readable heading */
 }
 
+/* Card Styling */
 .card {
-  background-color: #444;
+  background-color: #444; /* Dark card background */
   color: #fff;
   border: none;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  transition: transform 0.2s ease-in-out; /* Smooth scale effect on hover */
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Enlarge slightly on hover */
 }
 
+/* Card Image */
 .card-img-top {
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #333; /* Subtle separator line */
 }
 
+/* Card Title and Text */
 .card-title {
   font-size: 1.25rem;
   font-weight: bold;
@@ -35,40 +41,43 @@ h2 {
   margin-bottom: 20px;
 }
 
+/* Button Styles */
 .btn {
   border-radius: 20px;
   font-weight: bold;
 }
 
 .btn-primary {
-  background-color: #6c63ff;
+  background-color: #6c63ff; /* Custom primary color */
   border: none;
 }
 
 .btn-danger {
-  background-color: #e74c3c;
+  background-color: #e74c3c; /* Custom danger color */
   border: none;
 }
 
 .btn-success {
-  background-color: #2ecc71;
+  background-color: #2ecc71; /* Custom success color */
   border: none;
 }
 
 .btn:hover {
-  opacity: 0.9;
+  opacity: 0.9; /* Subtle transparency on hover */
 }
 
+/* Card Body Alignment */
 .card-body {
   text-align: center;
 }
 
+/* Paragraph Styling */
 p {
   font-size: 1rem;
 }
 
 p.text-white {
-  color: #ccc;
+  color: #ccc; /* Light text color for readability */
 }
 
 /* Responsive Adjustments */
@@ -78,6 +87,6 @@ p.text-white {
   }
 
   h2 {
-    font-size: 1.75rem;
+    font-size: 1.75rem; /* Smaller font size for mobile */
   }
 }

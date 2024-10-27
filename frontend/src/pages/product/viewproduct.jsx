@@ -1,7 +1,9 @@
-import  { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/shop-context";
 import { PRODUCTS } from "./product-data"; // Ensure the path is correct
+import CommentForm from './CommentForm'; // Import the CommentForm component
+import CommentList from './CommentList'; // Import the CommentList component
 import "./viewproduct.css"; // Add some styling
 
 function ViewProduct() {
@@ -10,20 +12,23 @@ function ViewProduct() {
   const [quantity, setQuantity] = useState(1);
   const [currencyReference, setCurrencyReference] = useState('₦');
   const [product, setProduct] = useState(null);
+  const [comments, setComments] = useState([]); // State for storing comments
 
   useEffect(() => {
     // Set the currency reference based on the currency from context
-    if (currency === "naira") {
-      setCurrencyReference('₦');
-    } else {
-      setCurrencyReference('$');
-    }
+    setCurrencyReference(currency === "naira" ? '₦' : '$');
   }, [currency]);
 
   useEffect(() => {
     // Find the product based on productId
     const foundProduct = PRODUCTS.find((item) => item.id === parseInt(productId));
     setProduct(foundProduct);
+  }, [productId]);
+
+  useEffect(() => {
+    // Fetch comments based on productId (you can replace this with an API call)
+    const fetchedComments = []; // Replace with actual fetching logic
+    setComments(fetchedComments);
   }, [productId]);
 
   if (!product) return <p>Loading product...</p>;
@@ -40,6 +45,10 @@ function ViewProduct() {
     } else {
       addToWishlist(product.id);
     }
+  };
+
+  const handleCommentAdded = (newComment) => {
+    setComments((prevComments) => [...prevComments, newComment]);
   };
 
   return (
@@ -86,6 +95,12 @@ function ViewProduct() {
             {isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
           </button>
         </div>
+      </div>
+
+      {/* Comments Section */}
+      <div className="comments-section my-4">
+        <CommentForm productId={productId} onCommentAdded={handleCommentAdded} />
+        <CommentList comments={comments} />
       </div>
     </div>
   );

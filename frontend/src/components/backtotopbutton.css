@@ -1,21 +1,31 @@
-
 .back-to-top {
   position: fixed;
   bottom: 50px;
   right: 30px;
   width: 50px;
   height: 50px;
-  background-color: #8e44ad;
+  background-color: #8e44ad; /* Primary button color */
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.back-to-top:hover {
+  background-color: #732d91; /* Darker shade on hover */
+  transform: scale(1.1); /* Slight scale effect on hover */
 }
 
 .back-to-top i {
   color: #fff;
   font-size: 24px;
+}
+
+/* Optional: Hide the button by default and show on scroll */
+.hide {
+  display: none; /* Hide the button initially */
 }

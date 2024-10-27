@@ -8,7 +8,7 @@ function Footer() {
         <div className="row">
           {/* Company Info */}
           <div className="col-md-4 mb-3">
-            <h5 className="gradient-text">About Us</h5>
+            <h5 className="new-color">About Us</h5>
             <p>
               We are an e-commerce platform dedicated to bringing the best products right to your doorstep. Quality and customer satisfaction are our top priorities.
             </p>
@@ -16,7 +16,7 @@ function Footer() {
 
           {/* Quick Links */}
           <div className="col-md-4 mb-3">
-            <h5 className="gradient-text">Quick Links</h5>
+            <h5 className="new-color">Quick Links</h5>
             <ul className="list-unstyled">
               <li>
                 <Link to="/" className="text-white text-decoration-none animated-link">Home</Link>
@@ -35,7 +35,7 @@ function Footer() {
 
           {/* Social Media Icons */}
           <div className="col-md-4 mb-3">
-            <h5 className="gradient-text">Follow Us</h5>
+            <h5 className="new-color">Follow Us</h5>
             <ul className="list-inline">
               <li className="list-inline-item">
                 <a href="#" className="text-white">

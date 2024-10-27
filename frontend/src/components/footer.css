@@ -38,3 +38,18 @@
 .list-inline-item a:hover {
   transform: scale(1.1); /* Slightly enlarges icons on hover */
 }
+.new-color{
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  background-size: 200%;
+  
+  transition: background 0.3s ease;
+}
+.new-color:hover{
+    color: #FFD700; /* Soft gold color on hover */
+  transform: scale(1.05);
+  
+  transition: background 0.3s ease;
+
+}
