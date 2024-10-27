@@ -25,8 +25,10 @@ export const ShopContextProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState(getDefaultCart());
     const [wishlistItems, setWishlistItems] = useState(getDefaultWishList());
     const [currency, setCurrency] = useState('naira');
+    const [comments, setComments] = useState([]);
+    
+    const MAX_QUANTITY = 99; // Set a maximum quantity limit
 
-    // Use useCallback to memoize functions
     const changeCurrency = useCallback((newCurrency) => {
         if (newCurrency !== currency) {
             setCurrency(newCurrency);
@@ -44,7 +46,10 @@ export const ShopContextProvider = ({ children }) => {
 
     const inputNumberFunc = useCallback((value, id) => {
         const quantity = Number(value);
-        if (quantity < 0) return;
+        if (quantity < 0 || quantity > MAX_QUANTITY) {
+            toast.error(`Quantity must be between 0 and ${MAX_QUANTITY}`);
+            return;
+        }
         setCartItems((prev) => {
             toast.info(`Quantity for item with id ${id} updated to ${quantity}`);
             return { ...prev, [id]: quantity };
@@ -72,6 +77,10 @@ export const ShopContextProvider = ({ children }) => {
 
     const addToWishlist = useCallback((itemId) => {
         setWishlistItems((prev) => {
+            if (prev[itemId] > 0) {
+                toast.warn(`Item with id ${itemId} is already in the wishlist`);
+                return prev; // Item already in wishlist, return unchanged
+            }
             const newCount = prev[itemId] + 1;
             toast.success(`Added item with id ${itemId} to wishlist`);
             return { ...prev, [itemId]: newCount };
@@ -89,6 +98,13 @@ export const ShopContextProvider = ({ children }) => {
         });
     }, []);
 
+  // Define the addComment function
+  const addComment = (productId, comment) => {
+    setComments((prevComments) => [
+      ...prevComments,
+      { productId, ...comment }, // Adjust this based on your comment structure
+    ]);
+  };
     const contextValue = {
         cartItems,
         wishlistItems,
@@ -100,6 +116,8 @@ export const ShopContextProvider = ({ children }) => {
         currency,
         removeFromWishlist,
         addToWishlist,
+        addComment,
+        comments
     };
 
     return (

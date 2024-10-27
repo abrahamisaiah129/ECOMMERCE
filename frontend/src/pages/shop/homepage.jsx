@@ -3,6 +3,8 @@ import { PRODUCTS } from "../product/product-data.js";
 import Product from "../product/product.jsx";
 import { ThemeContext } from "../context/theme-context.jsx";
 import BackToTopButton from "../../components/backtotopbutton.jsx";
+import { useNavigate } from "react-router-dom"; // Change to useNavigate
+// import PropTypes from "prop-types"; // Import PropTypes
 
 function Homepage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,6 +14,7 @@ function Homepage() {
   const [visibleItemsCount, setVisibleItemsCount] = useState(4); // Initial visible items
   const [sortByPrice, setSortByPrice] = useState(false); // Sort by price toggle
   const { isDarkTheme } = useContext(ThemeContext);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const uniqueCategories = [...new Set(PRODUCTS.map(product => product.category))];
@@ -48,6 +51,10 @@ function Homepage() {
   const sortedData = [...filteredData].sort((a, b) => {
     return sortByPrice ? a.price - b.price : 0; // Sort by price if sortByPrice is true
   });
+
+  const viewProductDetails = (productId) => {
+    navigate(`/product/${productId}`); // Navigate to product details page using useNavigate
+  };
 
   return (
     <div className={`p-5 ${isDarkTheme ? "bg-dark" : "bg-light"} my-4`}>
@@ -91,7 +98,11 @@ function Homepage() {
       {/* Product Cards */}
       <div className="row">
         {sortedData.slice(0, visibleItemsCount).map((data, index) => (
-          <Product data={data} key={index} />
+          <Product
+            data={data}
+            key={index}
+            onClick={() => viewProductDetails(data.id)} // Pass click handler
+          />
         ))}
       </div>
 
@@ -103,10 +114,14 @@ function Homepage() {
           </button>
         </div>
       )}
-  <BackToTopButton/>
+      <BackToTopButton />
     </div>
-  
   );
 }
+
+// Define PropTypes for the Homepage component
+// Homepage.propTypes = {
+//   // No props are passed to this component currently
+// };
 
 export default Homepage;

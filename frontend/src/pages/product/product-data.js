@@ -12,7 +12,7 @@ export let PRODUCTS = [
     id:1,
   name: 'random1',
   description:'randomrandpmrafff',
-  images: product1,
+   imageUrl: product1,
   price: 100,
   createdAt:Date.now(),
   discount:20,
@@ -20,12 +20,13 @@ export let PRODUCTS = [
  category :'food',
   
   sellerId:'seller-name',
+  stock:60
 },
    {
     id:2,
   name: 'random 2',
   description:'randomrandpmrafff',
-  images: product2,
+   imageUrl: product2,
   price: 9000,
   createdAt:Date.now(),
   discount:40,
@@ -33,12 +34,13 @@ export let PRODUCTS = [
  category :'food',
   
   sellerId:'seller-name',
+  stock:20
 },
    {
     id:3,
   name: 'random 3',
   description:'randomrandpmrafff',
-  images: product3,
+   imageUrl: product3,
   price: 9404040,
   createdAt:Date.now(),
   discount:5,
@@ -46,13 +48,14 @@ export let PRODUCTS = [
  category :'food',
   
   sellerId:'seller-name',
+  stock:0
   }
 ,
    {
     id: 4,
   name: 'random 4',
   description:'randomrandpmrafff',
-  images: product4,
+   imageUrl: product4,
   price: 4949490,
   createdAt:Date.now(),
   discount:55,
@@ -60,12 +63,13 @@ export let PRODUCTS = [
  category :'electronics',
   
   sellerId:'seller-name',
+  stock:20
 },
    {
     id:5,
   name: 'random 5',
   description:'randomrandpmrafff',
-  images: product5,
+   imageUrl: product5,
   price: 20000,
   createdAt:Date.now(),
   discount:44,
@@ -73,12 +77,13 @@ export let PRODUCTS = [
  category :'electronics',
   
   sellerId:'seller-name',
+  stock:200
 },
    {
     id:6,
   name: 'random1',
   description:'randomrandpmrafff',
-  images: product6,
+   imageUrl: product6,
   price: 1000,
   createdAt:Date.now(),
   discount:3,
@@ -86,6 +91,7 @@ export let PRODUCTS = [
  category :'electronics',
   
   sellerId:'seller-name',
+  stock:2
 }
 
 ]

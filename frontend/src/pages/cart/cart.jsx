@@ -1,11 +1,7 @@
-import {
-  useContext,
-  useEffect,
-  useState
-} from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/shop-context.jsx";
 import { PRODUCTS } from "../product/product-data.js";
-import CartItem from "./cart-items.jsx";
+import CartItem from "./cart-items.jsx"; // Ensure this component displays each cart item correctly
 import { ThemeContext } from "../context/theme-context.jsx";
 import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
 import 'react-toastify/dist/ReactToastify.css'; // Import CSS for Toastify
@@ -17,11 +13,7 @@ function Cart() {
   const [currencyReference, setCurrencyReference] = useState('₦');
 
   useEffect(() => {
-    if (currency === "naira") {
-      setCurrencyReference('₦');
-    } else {
-      setCurrencyReference('$');
-    }
+    setCurrencyReference(currency === "naira" ? '₦' : '$');
   }, [currency]);
 
   useEffect(() => {

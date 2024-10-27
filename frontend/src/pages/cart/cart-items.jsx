@@ -1,17 +1,21 @@
 import PropTypes from "prop-types";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ShopContext } from '../context/shop-context';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 function CartItem(props) {
     const { removeFromCart, addToCart, inputNumberFunc, deleteFromCart } = useContext(ShopContext);
-    const { name, images, price, discount, id } = props.dataValue;
+    const { name, imageUrl, price, discount, id } = props.dataValue;
     const piece = props.pieceNumber;
 
-    const [input, setInput] = useState(''); // Set it blank to avoid errors
+    const [input, setInput] = useState(piece); // Initialize with the current piece number
+
+    useEffect(() => {
+        setInput(piece); // Update input when piece changes
+    }, [piece]);
 
     const setValueFunc = (e) => {
-        const value = e.target.value;
+        const value = Math.max(1, parseInt(e.target.value)); // Ensure minimum value is 1
         setInput(value);
         inputNumberFunc(value, id); // Pass the id and new value to update quantity
     };
@@ -20,7 +24,7 @@ function CartItem(props) {
         <div className="col-sm-4 col-xs-8 col-lg-3 col-md-3 m-2 card p-3 shadow-sm" style={{ fontSize: "1rem", borderRadius: "10px", backgroundColor: "#f8f9fa" }}>
             <div id={id} className="d-flex flex-column justify-content-center align-items-center">
                 <img 
-                    src={images} 
+                    src={imageUrl} 
                     alt="Product" 
                     className="img-fluid mb-3" 
                     style={{ width: "100%", height: "150px", objectFit: "cover", borderRadius: "10px" }} 
@@ -90,7 +94,7 @@ function CartItem(props) {
 CartItem.propTypes = {
     dataValue: PropTypes.shape({
         name: PropTypes.string.isRequired,
-        images: PropTypes.string.isRequired,
+        imageUrl: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         discount: PropTypes.number.isRequired,
         id: PropTypes.number.isRequired,

@@ -1,32 +1,36 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
- const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true
+    required: true,
+    unique: true, // Ensure unique usernames
   },
   email: {
-    type: String,     
-    required: false
-  },
-  profileImage: {
     type: String,
-    default: null  
-   },
-   password:{
-   type: String,
-  required: true
+    required: true,
+    unique: true, // Ensure unique email addresses
+  },
+  password: {
+    type: String,
+    required: true,
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  },     
+    default: Date.now,
+  },
   updatedAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
+  wishlist: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product', // Reference to the Product model
+    },
+  ],
 });
 
 const User = mongoose.model('User', userSchema);
 
-export default User;
+module.exports = User;
