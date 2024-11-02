@@ -10,7 +10,7 @@ import Loader from './components/loader';
 // pages
 import Homepage from './pages/shop/homepage';
 import Cart from './pages/cart/cart';
-import Register from './pages/authentication/register'
+import AuthComponent from './pages/authentication/auth-component';
 import UserProfileForm from './pages/user/profile';
 import OrderTracking from './pages/cart/ordertracking';
 import ViewProduct from './pages/product/viewproduct';
@@ -53,7 +53,7 @@ useEffect(() => {
         
         <Route path="/" element={<Homepage />} />
         <Route path="/cart" element={<Cart />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/auth" element={<AuthComponent />} />
               <Route path='/settings' element={<Settings/>} />
                 <Route path='/profile' element={<UserProfileForm />} />
                 <Route path="/track-orders" element={<OrderTracking />} />

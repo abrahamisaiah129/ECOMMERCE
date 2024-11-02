@@ -1,18 +1,18 @@
-// routes/userRoutes.js
+// Import necessary modules
 import express from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import User from '../models/userModel.js';
+import bcrypt from 'bcrypt';            // For hashing passwords securely
+import jwt from 'jsonwebtoken';         // For generating JWT tokens
+import User from '../models/userModel.js';  // User model
 
 const router = express.Router();
 const JWT_SECRET = 'your_jwt_secret_key'; // Replace with an environment variable in production
 
-// Signup (Register) a new user
+// SIGNUP (Register) a new user
 router.post('/signup', async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Check if user already exists
+    // Check if the user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists' });
@@ -35,24 +35,24 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// Login a user
+// LOGIN a user
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check if the user exists
+    // Find the user by email
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    // Compare the password
+    // Validate the password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    // Generate JWT
+    // Generate a JWT token
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
     res.status(200).json({ message: 'Login successful', token });
@@ -61,9 +61,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Other user CRUD routes
-
-// Create a new user (for admin purposes)
+// ADMIN - Create a new user
 router.post('/', async (req, res) => {
   try {
     const newUser = new User(req.body);
@@ -97,7 +95,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Update a user
+// Update a user by ID
 router.put('/:id', async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -110,7 +108,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Delete a user
+// Delete a user by ID
 router.delete('/:id', async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);

@@ -60,7 +60,7 @@ function Navbar() {
           <Link className="nav-item nav-link animated-link text-white fw-bold" to="/settings">
             <i className="fa-solid fa-sun"></i> Settings
           </Link>
-          <Link className="nav-item nav-link animated-link text-white fw-bold" to="/register">
+          <Link className="nav-item nav-link animated-link text-white fw-bold" to="/auth">
             <i className="fa-solid fa-sign-in"></i> Register
           </Link>
           <Link className="nav-item nav-link animated-link text-white fw-bold" to="/track-orders">
